@@ -63,7 +63,7 @@ const VoiceDungeon: React.FC<VoiceDungeonProps> = ({ onExit }) => {
             scriptProcessor.connect(inputCtx.destination);
           },
           onmessage: async (message) => {
-            const base64Audio = message.serverContent?.modelTurn?.parts[0]?.inlineData?.data;
+            const base64Audio = message.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data;
             if (base64Audio && outputAudioContextRef.current) {
               const ctx = outputAudioContextRef.current;
               nextStartTimeRef.current = Math.max(nextStartTimeRef.current, ctx.currentTime);
@@ -93,7 +93,7 @@ const VoiceDungeon: React.FC<VoiceDungeonProps> = ({ onExit }) => {
 
             // Transcription handling
             if (message.serverContent?.outputTranscription) {
-               setTranscription(prev => [...prev.slice(-4), `AI: ${message.serverContent.outputTranscription.text}`]);
+               setTranscription(prev => [...prev.slice(-4), `AI: ${message.serverContent?.outputTranscription?.text}`]);
             }
           },
           onerror: (e) => console.error('Live API Error:', e),
