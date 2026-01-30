@@ -9,13 +9,21 @@ interface LobbyProps {
 const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
   const games = [
     {
+      id: GameMode.STUDY_QUIZ,
+      title: "Focus Quiz",
+      description: "Convert your study notes into a quick 5-question challenge. Best for reinforcing memory.",
+      icon: "fa-graduation-cap",
+      color: "from-violet-500 to-purple-400",
+      tag: "Learning • 4m",
+      isNew: true
+    },
+    {
       id: GameMode.ZEN_SCAPE,
       title: "Zen Scape",
       description: "Create a 2K masterpiece of your happy place. Perfect for a calming 5-minute break.",
       icon: "fa-leaf",
       color: "from-emerald-500 to-teal-400",
-      tag: "Relaxation • 5m",
-      isNew: true
+      tag: "Relaxation • 5m"
     },
     {
       id: GameMode.MIND_SPARKS,
@@ -23,8 +31,7 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
       description: "Rapid-fire logic riddles to sharpen your focus before the next Pomodoro session.",
       icon: "fa-bolt",
       color: "from-amber-500 to-orange-400",
-      tag: "Focus • 2m",
-      isNew: true
+      tag: "Focus • 2m"
     },
     {
       id: GameMode.VISION_QUEST,
@@ -33,14 +40,6 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
       icon: "fa-eye",
       color: "from-blue-500 to-cyan-400",
       tag: "Logic • 3m"
-    },
-    {
-      id: GameMode.VOICE_DUNGEON,
-      title: "Echo Dungeon",
-      description: "A real-time voice RPG. Talk to the dungeon master and shape your destiny.",
-      icon: "fa-microphone-alt",
-      color: "from-purple-500 to-indigo-400",
-      tag: "Long Break • 10m"
     }
   ];
 

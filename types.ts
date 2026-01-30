@@ -5,7 +5,8 @@ export enum GameMode {
   VOICE_DUNGEON = 'VOICE_DUNGEON',
   CHRONO_RPG = 'CHRONO_RPG',
   ZEN_SCAPE = 'ZEN_SCAPE',
-  MIND_SPARKS = 'MIND_SPARKS'
+  MIND_SPARKS = 'MIND_SPARKS',
+  STUDY_QUIZ = 'STUDY_QUIZ'
 }
 
 export interface GameState {

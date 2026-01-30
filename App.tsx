@@ -7,6 +7,7 @@ import VoiceDungeon from './games/VoiceDungeon';
 import ChronoRPG from './games/ChronoRPG';
 import ZenScape from './games/ZenScape';
 import MindSparks from './games/MindSparks';
+import StudyQuiz from './games/StudyQuiz';
 
 const App: React.FC = () => {
   const [currentMode, setCurrentMode] = useState<GameMode>(GameMode.LOBBY);
@@ -23,6 +24,8 @@ const App: React.FC = () => {
         return <ZenScape onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.MIND_SPARKS:
         return <MindSparks onExit={() => setCurrentMode(GameMode.LOBBY)} />;
+      case GameMode.STUDY_QUIZ:
+        return <StudyQuiz onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       default:
         return <Lobby onSelectGame={(mode) => setCurrentMode(mode)} />;
     }
