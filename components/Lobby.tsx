@@ -14,7 +14,15 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
       description: "Convert your study notes into a quick 5-question challenge. Best for reinforcing memory.",
       icon: "fa-graduation-cap",
       color: "from-violet-500 to-purple-400",
-      tag: "Learning • 4m",
+      tag: "Learning • 4m"
+    },
+    {
+      id: GameMode.HANGMAN,
+      title: "Lexi Hangman",
+      description: "Guess the secret word from AI hints. A classic word game powered by infinite vocabulary.",
+      icon: "fa-font",
+      color: "from-rose-500 to-pink-400",
+      tag: "Word • 3m",
       isNew: true
     },
     {
