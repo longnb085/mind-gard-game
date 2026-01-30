@@ -18,7 +18,7 @@ const MindSparks: React.FC<MindSparksProps> = ({ onExit }) => {
     setRevealed(false);
     setGuess('');
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
         contents: "Generate a clever but short logic riddle for a 1-minute break. Provide the question, the one-word answer, and a small hint. Output as JSON.",

@@ -27,7 +27,7 @@ const StudyQuiz: React.FC<StudyQuizProps> = ({ onExit }) => {
     if (!inputText.trim()) return;
     setLoading(true);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
         contents: `Create a 5-question multiple choice quiz based on this text: "${inputText}". 
@@ -57,9 +57,9 @@ const StudyQuiz: React.FC<StudyQuizProps> = ({ onExit }) => {
       const data = JSON.parse(response.text || '[]');
       setQuestions(data);
       setGameState('playing');
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      alert("Failed to generate quiz. Try a shorter text.");
+      alert("Error: " + (err.message || "Failed to generate quiz."));
     } finally {
       setLoading(false);
     }

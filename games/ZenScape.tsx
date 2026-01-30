@@ -18,16 +18,15 @@ const ZenScape: React.FC<ZenScapeProps> = ({ onExit }) => {
     setError(null);
 
     try {
-      // Check for API key as per rules for Pro Image models
       // @ts-ignore
       const hasKey = await window.aistudio.hasSelectedApiKey();
       if (!hasKey) {
         // @ts-ignore
         await window.aistudio.openSelectKey();
-        // Proceeding assuming selection was successful as per instructions
       }
 
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+      // Re-create instance to get the latest key from session
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-pro-image-preview',
         contents: {
@@ -58,7 +57,7 @@ const ZenScape: React.FC<ZenScapeProps> = ({ onExit }) => {
         // @ts-ignore
         await window.aistudio.openSelectKey();
       }
-      setError("The cosmos is currently noisy. Please try again.");
+      setError("Error: " + (err.message || "The cosmos is currently noisy. Please try again."));
     } finally {
       setLoading(false);
     }
