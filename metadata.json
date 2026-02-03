@@ -1,8 +1,5 @@
-
 {
-  "name": "Gemini Multiverse Games",
-  "description": "An AI-powered gaming hub featuring visual riddles, real-time voice adventures, and infinite text RPGs powered by Google Gemini.",
-  "requestFramePermissions": [
-    "microphone"
-  ]
+  "name": "Break Hub - Pomodoro Companion",
+  "description": "A collection of short, AI-powered games designed to refresh your focus during Pomodoro breaks, including Hangman and Minesweeper.",
+  "requestFramePermissions": []
 }

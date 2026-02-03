@@ -9,6 +9,23 @@ interface LobbyProps {
 const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
   const games = [
     {
+      id: GameMode.MINESWEEPER,
+      title: "Neon Sweeper",
+      description: "A cyberpunk take on the classic. Clear the grid of hidden data-mines. Fast-paced logic fun.",
+      icon: "fa-bomb",
+      color: "from-cyan-500 to-blue-400",
+      tag: "Logic • 2m",
+      isNew: true
+    },
+    {
+      id: GameMode.HANGMAN,
+      title: "Lexi Hangman",
+      description: "Guess secret words from AI-generated thematic hints. Infinite vocabulary training.",
+      icon: "fa-font",
+      color: "from-rose-500 to-pink-400",
+      tag: "Word • 3m"
+    },
+    {
       id: GameMode.STUDY_QUIZ,
       title: "Focus Quiz",
       description: "Convert your study notes into a quick 5-question challenge. Best for reinforcing memory.",
@@ -17,18 +34,9 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
       tag: "Learning • 4m"
     },
     {
-      id: GameMode.HANGMAN,
-      title: "Lexi Hangman",
-      description: "Guess the secret word from AI hints. A classic word game powered by infinite vocabulary.",
-      icon: "fa-font",
-      color: "from-rose-500 to-pink-400",
-      tag: "Word • 3m",
-      isNew: true
-    },
-    {
       id: GameMode.ZEN_SCAPE,
       title: "Zen Scape",
-      description: "Create a 2K masterpiece of your happy place. Perfect for a calming 5-minute break.",
+      description: "Create a masterpiece of your happy place. Perfect for a calming 5-minute break.",
       icon: "fa-leaf",
       color: "from-emerald-500 to-teal-400",
       tag: "Relaxation • 5m"
@@ -52,23 +60,23 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
   ];
 
   return (
-    <div className="animate-fade-in">
-      <div className="text-center mb-12">
+    <div className="animate-fade-in pb-12">
+      <div className="text-center mb-8 md:mb-12">
         <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-widest mb-4">
           <i className="fas fa-stopwatch"></i> Pomodoro Companion
         </div>
-        <h2 className="text-4xl md:text-5xl font-orbitron font-bold mb-4">Recharge Your Mind</h2>
-        <p className="text-slate-400 max-w-2xl mx-auto">
-          Short, AI-powered experiences designed to refresh your focus during breaks.
+        <h2 className="text-3xl md:text-5xl font-orbitron font-bold mb-4">Recharge Your Mind</h2>
+        <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base px-4">
+          Short, AI-enhanced experiences designed to refresh your cognitive focus during break cycles.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {games.map((game) => (
           <div 
             key={game.id}
             onClick={() => onSelectGame(game.id)}
-            className="group relative cursor-pointer h-[320px] overflow-hidden rounded-2xl transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-indigo-500/10"
+            className="group relative cursor-pointer h-[280px] md:h-[320px] overflow-hidden rounded-2xl transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-indigo-500/10"
           >
             <div className={`absolute inset-0 bg-gradient-to-br ${game.color} opacity-5 group-hover:opacity-10 transition-opacity`}></div>
             
@@ -92,7 +100,7 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
               </p>
 
               <div className="mt-auto flex items-center gap-2 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-                PLAY <i className="fas fa-chevron-right text-[10px]"></i>
+                START BREAK <i className="fas fa-chevron-right text-[10px]"></i>
               </div>
             </div>
           </div>

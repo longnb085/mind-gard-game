@@ -9,12 +9,18 @@ import ZenScape from './games/ZenScape';
 import MindSparks from './games/MindSparks';
 import StudyQuiz from './games/StudyQuiz';
 import Hangman from './games/Hangman';
+import Minesweeper from './games/Minesweeper';
+
 
 const App: React.FC = () => {
   const [currentMode, setCurrentMode] = useState<GameMode>(GameMode.LOBBY);
 
   const renderContent = () => {
     switch (currentMode) {
+      case GameMode.HANGMAN:
+        return <Hangman onExit={() => setCurrentMode(GameMode.LOBBY)} />;
+      case GameMode.MINESWEEPER:
+        return <Minesweeper onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.VISION_QUEST:
         return <VisionQuest onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.VOICE_DUNGEON:
@@ -27,17 +33,15 @@ const App: React.FC = () => {
         return <MindSparks onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.STUDY_QUIZ:
         return <StudyQuiz onExit={() => setCurrentMode(GameMode.LOBBY)} />;
-      case GameMode.HANGMAN:
-        return <Hangman onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       default:
         return <Lobby onSelectGame={(mode) => setCurrentMode(mode)} />;
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0f1d]">
+    <div className="min-h-screen h-screen flex flex-col bg-[#0a0f1d] overflow-hidden">
       {/* Header */}
-      <header className="p-6 flex justify-between items-center glass sticky top-0 z-50">
+      <header className="p-4 md:p-6 flex justify-between items-center glass sticky top-0 z-50">
         <div 
           className="flex items-center gap-3 cursor-pointer group"
           onClick={() => setCurrentMode(GameMode.LOBBY)}
@@ -50,12 +54,12 @@ const App: React.FC = () => {
           </h1>
         </div>
         
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-4 md:gap-6 items-center">
           <div className="hidden md:flex flex-col items-end">
              <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Pomodoro Status</span>
              <span className="text-sm text-pink-500 font-medium">Break in Progress</span>
           </div>
-          <div className="px-4 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-xs font-medium text-slate-400 flex items-center gap-2">
+          <div className="px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-xs font-medium text-slate-400 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
             AI Online
           </div>
@@ -70,7 +74,7 @@ const App: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="p-6 text-center text-slate-600 text-[10px] uppercase tracking-[0.2em]">
+      <footer className="p-4 text-center text-slate-600 text-[10px] uppercase tracking-[0.2em] shrink-0">
         Designed for Focus • Powered by Gemini 3.0
       </footer>
     </div>

@@ -7,7 +7,8 @@ export enum GameMode {
   ZEN_SCAPE = 'ZEN_SCAPE',
   MIND_SPARKS = 'MIND_SPARKS',
   STUDY_QUIZ = 'STUDY_QUIZ',
-  HANGMAN = 'HANGMAN'
+  HANGMAN = 'HANGMAN',
+  MINESWEEPER = 'MINESWEEPER'
 }
 
 export interface GameState {
