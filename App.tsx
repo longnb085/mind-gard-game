@@ -2,14 +2,16 @@
 import React, { useState } from 'react';
 import { GameMode } from './types';
 import Lobby from './components/Lobby';
-import VisionQuest from './games/VisionQuest';
-import VoiceDungeon from './games/VoiceDungeon';
-import ChronoRPG from './games/ChronoRPG';
-import ZenScape from './games/ZenScape';
+
 import MindSparks from './games/MindSparks';
 import StudyQuiz from './games/StudyQuiz';
 import Hangman from './games/Hangman';
 import Minesweeper from './games/Minesweeper';
+import SchulteTable from './games/SchulteTable';
+import StroopChallenge from './games/StroopChallenge';
+
+import MemoryMatrix from './games/MemoryMatrix';
+import TypeSprint from './games/TypeSprint';
 
 
 const App: React.FC = () => {
@@ -21,14 +23,16 @@ const App: React.FC = () => {
         return <Hangman onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.MINESWEEPER:
         return <Minesweeper onExit={() => setCurrentMode(GameMode.LOBBY)} />;
-      case GameMode.VISION_QUEST:
-        return <VisionQuest onExit={() => setCurrentMode(GameMode.LOBBY)} />;
-      case GameMode.VOICE_DUNGEON:
-        return <VoiceDungeon onExit={() => setCurrentMode(GameMode.LOBBY)} />;
-      case GameMode.CHRONO_RPG:
-        return <ChronoRPG onExit={() => setCurrentMode(GameMode.LOBBY)} />;
-      case GameMode.ZEN_SCAPE:
-        return <ZenScape onExit={() => setCurrentMode(GameMode.LOBBY)} />;
+      case GameMode.SCHULTE_TABLE:
+        return <SchulteTable onExit={() => setCurrentMode(GameMode.LOBBY)} />;
+      case GameMode.STROOP_CHALLENGE:
+        return <StroopChallenge onExit={() => setCurrentMode(GameMode.LOBBY)} />;
+
+      case GameMode.MEMORY_MATRIX:
+        return <MemoryMatrix onExit={() => setCurrentMode(GameMode.LOBBY)} />;
+      case GameMode.TYPE_SPRINT:
+        return <TypeSprint onExit={() => setCurrentMode(GameMode.LOBBY)} />;
+
       case GameMode.MIND_SPARKS:
         return <MindSparks onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.STUDY_QUIZ:
@@ -42,7 +46,7 @@ const App: React.FC = () => {
     <div className="min-h-screen h-screen flex flex-col bg-[#0a0f1d] overflow-hidden">
       {/* Header */}
       <header className="p-4 md:p-6 flex justify-between items-center glass sticky top-0 z-50">
-        <div 
+        <div
           className="flex items-center gap-3 cursor-pointer group"
           onClick={() => setCurrentMode(GameMode.LOBBY)}
         >
@@ -53,11 +57,11 @@ const App: React.FC = () => {
             BREAK HUB
           </h1>
         </div>
-        
+
         <div className="flex gap-4 md:gap-6 items-center">
           <div className="hidden md:flex flex-col items-end">
-             <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Pomodoro Status</span>
-             <span className="text-sm text-pink-500 font-medium">Break in Progress</span>
+            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Pomodoro Status</span>
+            <span className="text-sm text-pink-500 font-medium">Break in Progress</span>
           </div>
           <div className="px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-xs font-medium text-slate-400 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>

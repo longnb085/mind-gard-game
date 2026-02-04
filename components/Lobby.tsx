@@ -15,6 +15,43 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
       icon: "fa-bomb",
       color: "from-cyan-500 to-blue-400",
       tag: "Logic • 2m",
+      isNew: false
+    },
+    {
+      id: GameMode.SCHULTE_TABLE,
+      title: "Schulte Grid",
+      description: "Find numbers in order. High-intensity vision training.",
+      icon: "fa-border-all",
+      color: "from-cyan-500 to-blue-400",
+      tag: "Focus • 1m",
+      isNew: true
+    },
+    {
+      id: GameMode.STROOP_CHALLENGE,
+      title: "Stroop Test",
+      description: "Don't read the word, name the color. Cognitive flexibility.",
+      icon: "fa-palette",
+      color: "from-pink-500 to-rose-400",
+      tag: "Brain • 2m",
+      isNew: true
+    },
+
+    {
+      id: GameMode.MEMORY_MATRIX,
+      title: "Memory Matrix",
+      description: "Recall patterns on a grid. Working memory booster.",
+      icon: "fa-th",
+      color: "from-violet-500 to-purple-400",
+      tag: "Memory • 3m",
+      isNew: true
+    },
+    {
+      id: GameMode.TYPE_SPRINT,
+      title: "Type Sprint",
+      description: "Type falling code keywords. Wake up your fingers.",
+      icon: "fa-keyboard",
+      color: "from-emerald-500 to-teal-400",
+      tag: "Speed • 2m",
       isNew: true
     },
     {
@@ -33,14 +70,7 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
       color: "from-violet-500 to-purple-400",
       tag: "Learning • 4m"
     },
-    {
-      id: GameMode.ZEN_SCAPE,
-      title: "Zen Scape",
-      description: "Create a masterpiece of your happy place. Perfect for a calming 5-minute break.",
-      icon: "fa-leaf",
-      color: "from-emerald-500 to-teal-400",
-      tag: "Relaxation • 5m"
-    },
+
     {
       id: GameMode.MIND_SPARKS,
       title: "Mind Sparks",
@@ -49,14 +79,7 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
       color: "from-amber-500 to-orange-400",
       tag: "Focus • 2m"
     },
-    {
-      id: GameMode.VISION_QUEST,
-      title: "Vision Quest",
-      description: "AI generates surreal images based on hidden words. Solve the visual enigma.",
-      icon: "fa-eye",
-      color: "from-blue-500 to-cyan-400",
-      tag: "Logic • 3m"
-    }
+
   ];
 
   return (
@@ -73,13 +96,13 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {games.map((game) => (
-          <div 
+          <div
             key={game.id}
             onClick={() => onSelectGame(game.id)}
             className="group relative cursor-pointer h-[280px] md:h-[320px] overflow-hidden rounded-2xl transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-indigo-500/10"
           >
             <div className={`absolute inset-0 bg-gradient-to-br ${game.color} opacity-5 group-hover:opacity-10 transition-opacity`}></div>
-            
+
             <div className="absolute inset-0 p-6 flex flex-col glass group-hover:bg-slate-800/80 transition-colors">
               <div className="flex justify-between items-start mb-4">
                 <span className="px-2 py-1 rounded-md bg-slate-700/50 text-[10px] font-bold tracking-tighter uppercase text-slate-300 border border-white/5">
