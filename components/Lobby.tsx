@@ -10,8 +10,8 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
   const games = [
     {
       id: GameMode.MINESWEEPER,
-      title: "Neon Sweeper",
-      description: "A cyberpunk take on the classic. Clear the grid of hidden data-mines. Fast-paced logic fun.",
+      title: "Minesweeper",
+      description: "Clear the grid of hidden mines. A classic logic puzzle.",
       icon: "fa-bomb",
       color: "from-cyan-500 to-blue-400",
       tag: "Logic • 2m",
@@ -19,8 +19,8 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
     },
     {
       id: GameMode.SCHULTE_TABLE,
-      title: "Schulte Grid",
-      description: "Find numbers in order. High-intensity vision training.",
+      title: "Schulte Table",
+      description: "Find numbers in ascending order. Improves peripheral vision and focus.",
       icon: "fa-border-all",
       color: "from-cyan-500 to-blue-400",
       tag: "Focus • 1m",
@@ -28,8 +28,8 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
     },
     {
       id: GameMode.STROOP_CHALLENGE,
-      title: "Stroop Test",
-      description: "Don't read the word, name the color. Cognitive flexibility.",
+      title: "Stroop Challenge",
+      description: "Select the color of the text, not the word itself. Cognitive flexibility training.",
       icon: "fa-palette",
       color: "from-pink-500 to-rose-400",
       tag: "Brain • 2m",
@@ -38,8 +38,8 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
 
     {
       id: GameMode.MEMORY_MATRIX,
-      title: "Memory Matrix",
-      description: "Recall patterns on a grid. Working memory booster.",
+      title: "Memory Pattern",
+      description: "Memorize and recall the highlighted grid pattern.",
       icon: "fa-th",
       color: "from-violet-500 to-purple-400",
       tag: "Memory • 3m",
@@ -47,8 +47,8 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
     },
     {
       id: GameMode.TYPE_SPRINT,
-      title: "Type Sprint",
-      description: "Type falling code keywords. Wake up your fingers.",
+      title: "Speed Typing",
+      description: "Type the falling words before they disappear.",
       icon: "fa-keyboard",
       color: "from-emerald-500 to-teal-400",
       tag: "Speed • 2m",
@@ -56,16 +56,16 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
     },
     {
       id: GameMode.HANGMAN,
-      title: "Lexi Hangman",
-      description: "Guess secret words from AI-generated thematic hints. Infinite vocabulary training.",
+      title: "Hangman",
+      description: "Guess the hidden word before you run out of attempts.",
       icon: "fa-font",
       color: "from-rose-500 to-pink-400",
       tag: "Word • 3m"
     },
     {
       id: GameMode.STUDY_QUIZ,
-      title: "Focus Quiz",
-      description: "Convert your study notes into a quick 5-question challenge. Best for reinforcing memory.",
+      title: "Study Quiz",
+      description: "Review your knowledge with quick generated questions.",
       icon: "fa-graduation-cap",
       color: "from-violet-500 to-purple-400",
       tag: "Learning • 4m"
@@ -73,13 +73,12 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
 
     {
       id: GameMode.MIND_SPARKS,
-      title: "Mind Sparks",
-      description: "Rapid-fire logic riddles to sharpen your focus before the next Pomodoro session.",
+      title: "Logic Riddles",
+      description: "Quick logic puzzles to jumpstart your brain.",
       icon: "fa-bolt",
       color: "from-amber-500 to-orange-400",
       tag: "Focus • 2m"
     },
-
   ];
 
   return (
