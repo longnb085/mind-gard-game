@@ -13,24 +13,7 @@ interface Word {
     speed: number;
 }
 
-const WORDS_LIST = [
-    // Nature & World
-    "sky", "sun", "moon", "star", "tree", "river", "ocean", "mountain", "forest", "rain",
-    "cloud", "wind", "fire", "earth", "flower", "garden", "animal", "brave", "storm",
-
-    // Focus & Mind
-    "focus", "mind", "think", "brain", "logic", "puzzle", "memory", "smart", "idea",
-    "learn", "study", "read", "write", "solve", "create", "vision", "dream", "goal",
-
-    // Positive & Action
-    "happy", "joy", "peace", "love", "hope", "smile", "laugh", "dance", "play", "run",
-    "walk", "jump", "swim", "fly", "climb", "build", "grow", "start", "finish",
-
-    // Abstract & Common
-    "time", "life", "path", "way", "light", "sound", "music", "color", "shape",
-    "friend", "family", "house", "home", "world", "space", "planet", "galaxy",
-    "energy", "power", "spirit", "simple", "complex", "moment", "future", "past"
-];
+import { WORDS_LIST } from './data/TypeSprintData';
 
 const TypeSprint: React.FC<TypeSprintProps> = ({ onExit }) => {
     const [words, setWords] = useState<Word[]>([]);
