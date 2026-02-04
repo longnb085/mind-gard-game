@@ -14,18 +14,22 @@ interface Word {
 }
 
 const WORDS_LIST = [
-    "function", "const", "let", "var", "return", "import", "export", "default",
-    "class", "interface", "type", "enum", "async", "await", "promise",
-    "react", "state", "effect", "component", "props", "hook", "context",
-    "div", "span", "button", "input", "form", "label", "img", "svg",
-    "style", "class", "id", "width", "height", "color", "background",
-    "grid", "flex", "block", "inline", "none", "border", "margin", "padding",
-    "console", "log", "error", "warn", "info", "table", "group",
-    "map", "filter", "reduce", "find", "some", "every", "push", "pop",
-    "string", "number", "boolean", "object", "array", "symbol", "null",
-    "git", "commit", "push", "pull", "branch", "merge", "checkout",
-    "docker", "build", "run", "image", "container", "volume", "port",
-    "api", "http", "https", "get", "post", "put", "delete", "patch"
+    // Nature & World
+    "sky", "sun", "moon", "star", "tree", "river", "ocean", "mountain", "forest", "rain",
+    "cloud", "wind", "fire", "earth", "flower", "garden", "animal", "brave", "storm",
+
+    // Focus & Mind
+    "focus", "mind", "think", "brain", "logic", "puzzle", "memory", "smart", "idea",
+    "learn", "study", "read", "write", "solve", "create", "vision", "dream", "goal",
+
+    // Positive & Action
+    "happy", "joy", "peace", "love", "hope", "smile", "laugh", "dance", "play", "run",
+    "walk", "jump", "swim", "fly", "climb", "build", "grow", "start", "finish",
+
+    // Abstract & Common
+    "time", "life", "path", "way", "light", "sound", "music", "color", "shape",
+    "friend", "family", "house", "home", "world", "space", "planet", "galaxy",
+    "energy", "power", "spirit", "simple", "complex", "moment", "future", "past"
 ];
 
 const TypeSprint: React.FC<TypeSprintProps> = ({ onExit }) => {
@@ -145,27 +149,27 @@ const TypeSprint: React.FC<TypeSprintProps> = ({ onExit }) => {
             <div className="flex-1 relative bg-slate-900/50 rounded-2xl border border-white/5 shadow-inner overflow-hidden" ref={containerRef}>
                 {gameState === 'idle' ? (
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900/80 backdrop-blur-sm z-20">
-                        <h1 className="text-4xl font-orbitron font-bold text-emerald-400 mb-4">Type Sprint</h1>
+                        <h1 className="text-4xl font-orbitron font-bold text-emerald-400 mb-4">Speed Typing</h1>
                         <p className="text-slate-300 mb-8 max-w-sm text-center">
-                            Type the falling keywords before they crash.
-                            Activates motor skills and code-switching.
+                            Type the falling words before they hit the bottom.
+                            Boost your focus and reaction speed.
                         </p>
                         <button
                             onClick={startGame}
                             className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl font-bold text-white transition-colors"
                         >
-                            Initialize Terminal
+                            Start Game
                         </button>
                     </div>
                 ) : gameState === 'over' ? (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-rose-900/80 backdrop-blur-sm z-20 animate-in zoom-in">
-                        <h2 className="text-3xl font-orbitron font-bold text-white mb-2">SYSTEM FAILURE</h2>
-                        <p className="text-rose-200 mb-8 font-bold text-xl">Score: {score}</p>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900/90 backdrop-blur-sm z-20 animate-in zoom-in">
+                        <h2 className="text-3xl font-orbitron font-bold text-white mb-2">GAME OVER</h2>
+                        <p className="text-emerald-400 mb-8 font-bold text-xl">Score: {score}</p>
                         <button
                             onClick={startGame}
-                            className="px-8 py-3 bg-white text-rose-600 rounded-xl font-bold hover:bg-slate-100 transition-colors"
+                            className="px-8 py-3 bg-white text-emerald-600 rounded-xl font-bold hover:bg-slate-100 transition-colors"
                         >
-                            Reboot System
+                            Try Again
                         </button>
                     </div>
                 ) : null}
@@ -192,7 +196,7 @@ const TypeSprint: React.FC<TypeSprintProps> = ({ onExit }) => {
             {/* Input Area */}
             <div className="mt-4 z-10 w-full max-w-md mx-auto">
                 <div className="relative">
-                    <i className="fas fa-terminal absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                    <i className="fas fa-keyboard absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
                     <input
                         type="text"
                         value={inputValue}
@@ -200,7 +204,7 @@ const TypeSprint: React.FC<TypeSprintProps> = ({ onExit }) => {
                         disabled={gameState !== 'playing'}
                         autoFocus
                         className="w-full bg-slate-800 border-2 border-slate-700 focus:border-emerald-500 rounded-xl py-3 pl-10 pr-4 text-white font-mono outline-none transition-colors"
-                        placeholder={gameState === 'playing' ? "Type command..." : "Waiting for initialization..."}
+                        placeholder={gameState === 'playing' ? "Type here..." : "Ready..."}
                     />
                 </div>
             </div>
