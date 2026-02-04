@@ -54,7 +54,7 @@ const App: React.FC = () => {
             <i className="fas fa-brain text-white"></i>
           </div>
           <h1 className="text-xl md:text-2xl font-orbitron font-bold tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-pink-500">
-            BREAK HUB
+            MINDGARD
           </h1>
         </div>
 
@@ -63,10 +63,10 @@ const App: React.FC = () => {
             <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Pomodoro Status</span>
             <span className="text-sm text-pink-500 font-medium">Break in Progress</span>
           </div>
-          <div className="px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-xs font-medium text-slate-400 flex items-center gap-2">
+          {/* <div className="px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-xs font-medium text-slate-400 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
             AI Online
-          </div>
+          </div> */}
         </div>
       </header>
 
