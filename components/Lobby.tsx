@@ -43,6 +43,17 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
       icon: "fa-th",
       color: "from-violet-500 to-purple-400",
       tag: "Memory • 3m",
+
+
+      isNew: true
+    },
+    {
+      id: GameMode.NUMBER_BATTLE,
+      title: "Number Battle",
+      description: "Connect matching numbers or divide them by their GCD. Clear the board.",
+      icon: "fa-divide",
+      color: "from-blue-600 to-indigo-500",
+      tag: "Math Logic • 5m",
       isNew: true
     },
     {

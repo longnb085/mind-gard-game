@@ -12,6 +12,7 @@ import StroopChallenge from './games/StroopChallenge';
 
 import MemoryMatrix from './games/MemoryMatrix';
 import TypeSprint from './games/TypeSprint';
+import NumberBattle from './games/NumberBattle';
 
 
 const App: React.FC = () => {
@@ -32,6 +33,8 @@ const App: React.FC = () => {
         return <MemoryMatrix onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.TYPE_SPRINT:
         return <TypeSprint onExit={() => setCurrentMode(GameMode.LOBBY)} />;
+      case GameMode.NUMBER_BATTLE:
+        return <NumberBattle onExit={() => setCurrentMode(GameMode.LOBBY)} />;
 
       case GameMode.MIND_SPARKS:
         return <MindSparks onExit={() => setCurrentMode(GameMode.LOBBY)} />;
