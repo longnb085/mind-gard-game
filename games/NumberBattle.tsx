@@ -342,6 +342,32 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
                             />
                         </svg>
                     )}
+
+                    {/* Victory Modal - Scoped to Board */}
+                    {isVictory && (
+                        <div className="absolute inset-0 z-50 flex items-center justify-center bg-slate-900/90 backdrop-blur-sm rounded-xl animate-fade-in">
+                            <div className="text-center p-6 w-full max-w-xs animate-scale-in">
+                                <div className="text-5xl mb-4">🏆</div>
+                                <h2 className="text-3xl font-bold text-white mb-2 font-orbitron">VICTORY!</h2>
+                                <p className="text-emerald-400 mb-6 font-mono text-sm">Board Cleared</p>
+
+                                <div className="flex flex-col gap-3">
+                                    <button
+                                        onClick={(e) => { e.stopPropagation(); setIsVictory(false); initGame(gridSize); }}
+                                        className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold transition-colors shadow-lg"
+                                    >
+                                        Play Again
+                                    </button>
+                                    <button
+                                        onClick={(e) => { e.stopPropagation(); setIsVictory(false); setIsPlaying(false); }}
+                                        className="w-full py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-bold transition-colors"
+                                    >
+                                        Menu
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -353,32 +379,6 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
                     Reset Board
                 </button>
             </div>
-
-            {/* Victory Modal */}
-            {isVictory && (
-                <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fade-in">
-                    <div className="bg-slate-900 p-8 rounded-2xl border border-emerald-500 shadow-[0_0_50px_rgba(16,185,129,0.2)] text-center max-w-sm mx-4 transform animate-scale-in">
-                        <div className="text-6xl mb-4">🏆</div>
-                        <h2 className="text-4xl font-bold text-white mb-2 font-orbitron">VICTORY!</h2>
-                        <p className="text-emerald-400 mb-8 font-mono">Board Cleared</p>
-
-                        <div className="flex flex-col gap-3">
-                            <button
-                                onClick={() => { setIsVictory(false); initGame(gridSize); }}
-                                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold transition-colors shadow-lg"
-                            >
-                                Play Again
-                            </button>
-                            <button
-                                onClick={() => { setIsVictory(false); setIsPlaying(false); }}
-                                className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-bold transition-colors"
-                            >
-                                Select Difficulty
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
