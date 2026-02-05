@@ -21,6 +21,7 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
     const [path, setPath] = useState<{ r: number, c: number }[]>([]);
     const [message, setMessage] = useState('');
     const [score, setScore] = useState(0);
+    const [isVictory, setIsVictory] = useState(false);
 
     // Remove auto-init on mount since we have a menu now
     // useEffect(() => { initGame(gridSize); }, [gridSize]);
@@ -36,24 +37,71 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
     };
 
     const initGame = (size: number) => {
-        const newGrid: (Tile | null)[][] = Array(size).fill(null).map(() => Array(size).fill(null));
-
-        const numbers: number[] = [];
+        // 1. Initialize grid with 1s
         const totalTiles = size * size;
+        let numbers = new Array(totalTiles).fill(1);
 
-        for (let i = 0; i < totalTiles; i++) {
-            let val = 1;
-            const numFactors = Math.floor(Math.random() * 2) + 1;
-            for (let k = 0; k < numFactors; k++) {
-                const p = PRIMES[Math.floor(Math.random() * PRIMES.length)];
-                val *= p;
-            }
-            while (val > 100 && val % 2 === 0) val /= 2;
-            if (val > 100) val = PRIMES[Math.floor(Math.random() * 4)];
+        // 2. Define Primes based on difficulty
+        let primes: number[] = [];
+        let maxVal = 100;
+        let density = 2.5; // Average factors per tile
 
-            numbers.push(val);
+        if (size === 4) {
+            primes = [2, 3, 5];
+            maxVal = 50;
+            density = 2.2;
+        } else if (size === 6) {
+            primes = [2, 3, 5, 7];
+            maxVal = 100;
+            density = 2.8;
+        } else {
+            primes = [2, 3, 5, 7, 11, 13];
+            maxVal = 150;
+            density = 3.2;
         }
 
+        // 3. Distribute Pairs of Primes
+        // We add primes in pairs to ensure the total board product is a perfect square.
+        // This guarantees that if we reduce by GCD (removing square factors), we can eventually reach all 1s.
+
+        let attempts = 0;
+        const targetTotalFactors = totalTiles * density;
+        let currentFactors = 0;
+
+        while (currentFactors < targetTotalFactors && attempts < 10000) {
+            attempts++;
+            const p = primes[Math.floor(Math.random() * primes.length)];
+
+            // Pick two random indices (can be the same, allowing square numbers like 49, 25)
+            const idx1 = Math.floor(Math.random() * totalTiles);
+            const idx2 = Math.floor(Math.random() * totalTiles);
+
+            const newVal1 = numbers[idx1] * p;
+            const newVal2 = numbers[idx2] * p;
+
+            // Check hard limits to keep numbers readable
+            if (newVal1 <= maxVal && newVal2 <= maxVal) {
+                numbers[idx1] = newVal1;
+                numbers[idx2] = newVal2;
+                currentFactors += 2;
+            }
+        }
+
+        // 4. Ensure no tile remains '1'
+        // If a tile is 1, we MUST add a pair involving it.
+        for (let i = 0; i < totalTiles; i++) {
+            while (numbers[i] === 1) {
+                const p = primes[Math.floor(Math.random() * primes.length)];
+                const otherIdx = Math.floor(Math.random() * totalTiles);
+
+                if (numbers[otherIdx] * p <= maxVal * 1.5) {
+                    numbers[i] *= p;
+                    numbers[otherIdx] *= p;
+                }
+            }
+        }
+
+        const newGrid: (Tile | null)[][] = Array(size).fill(null).map(() => Array(size).fill(null));
         let k = 0;
         for (let r = 0; r < size; r++) {
             for (let c = 0; c < size; c++) {
@@ -175,6 +223,7 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
 
                     if (newGrid.every(row => row.every(cell => cell === null))) {
                         setMessage("VICTORY! All cleared.");
+                        setIsVictory(true);
                     }
                 }, 400);
             } else {
@@ -304,6 +353,32 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
                     Reset Board
                 </button>
             </div>
+
+            {/* Victory Modal */}
+            {isVictory && (
+                <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fade-in">
+                    <div className="bg-slate-900 p-8 rounded-2xl border border-emerald-500 shadow-[0_0_50px_rgba(16,185,129,0.2)] text-center max-w-sm mx-4 transform animate-scale-in">
+                        <div className="text-6xl mb-4">🏆</div>
+                        <h2 className="text-4xl font-bold text-white mb-2 font-orbitron">VICTORY!</h2>
+                        <p className="text-emerald-400 mb-8 font-mono">Board Cleared</p>
+
+                        <div className="flex flex-col gap-3">
+                            <button
+                                onClick={() => { setIsVictory(false); initGame(gridSize); }}
+                                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold transition-colors shadow-lg"
+                            >
+                                Play Again
+                            </button>
+                            <button
+                                onClick={() => { setIsVictory(false); setIsPlaying(false); }}
+                                className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-bold transition-colors"
+                            >
+                                Select Difficulty
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
