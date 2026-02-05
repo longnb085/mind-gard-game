@@ -19,10 +19,12 @@ const TypeSprint: React.FC<TypeSprintProps> = ({ onExit }) => {
     const [words, setWords] = useState<Word[]>([]);
     const [inputValue, setInputValue] = useState('');
     const [score, setScore] = useState(0);
+    const scoreRef = useRef(0); // Ref to access current score in game loop
     const [gameState, setGameState] = useState<'idle' | 'playing' | 'over'>('idle');
-    const [spawnRate, setSpawnRate] = useState(2000);
-    const requestRef = useRef<number>();
-    const lastTimeRef = useRef<number>();
+    // Removed unused spawnRate state
+
+    const requestRef = useRef<number>(0);
+    const lastTimeRef = useRef<number>(0);
     const spawnTimerRef = useRef<number>(0);
     const nextWordId = useRef(0);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -30,7 +32,7 @@ const TypeSprint: React.FC<TypeSprintProps> = ({ onExit }) => {
     const spawnWord = () => {
         const text = WORDS_LIST[Math.floor(Math.random() * WORDS_LIST.length)];
         const x = Math.random() * 80 + 5; // 5% to 85%
-        const speed = 5 + Math.random() * 5 + (score / 100); // Speed increases with score
+        const speed = 5 + Math.random() * 5 + (scoreRef.current / 100); // Speed increases with score
 
         setWords(prev => [...prev, {
             id: nextWordId.current++,
@@ -50,7 +52,7 @@ const TypeSprint: React.FC<TypeSprintProps> = ({ onExit }) => {
 
         // Spawn logic
         spawnTimerRef.current += deltaTime * 1000;
-        const currentSpawnRate = Math.max(500, 2000 - score * 5); // Cap at 500ms
+        const currentSpawnRate = Math.max(500, 2000 - scoreRef.current * 5); // Cap at 500ms
         if (spawnTimerRef.current > currentSpawnRate) {
             spawnWord();
             spawnTimerRef.current = 0;
@@ -82,12 +84,17 @@ const TypeSprint: React.FC<TypeSprintProps> = ({ onExit }) => {
             requestRef.current = requestAnimationFrame(gameLoop);
         } else {
             if (requestRef.current) cancelAnimationFrame(requestRef.current);
-            lastTimeRef.current = undefined; // Reset time
+            lastTimeRef.current = 0; // Reset time
         }
         return () => {
             if (requestRef.current) cancelAnimationFrame(requestRef.current);
         };
     }, [gameState]);
+
+    // Keep scoreRef in sync with score state
+    useEffect(() => {
+        scoreRef.current = score;
+    }, [score]);
 
     const startGame = () => {
         setWords([]);
@@ -95,7 +102,7 @@ const TypeSprint: React.FC<TypeSprintProps> = ({ onExit }) => {
         setInputValue('');
         setGameState('playing');
         nextWordId.current = 0;
-        lastTimeRef.current = undefined;
+        lastTimeRef.current = 0;
         spawnTimerRef.current = 0;
     };
 
