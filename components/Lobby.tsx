@@ -95,12 +95,12 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
   return (
     <div className="animate-fade-in pb-12">
       <div className="text-center mb-8 md:mb-12">
-        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-widest mb-4">
+        {/* <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-widest mb-4">
           <i className="fas fa-stopwatch"></i> Pomodoro Companion
-        </div>
-        <h2 className="text-3xl md:text-5xl font-orbitron font-bold mb-4">Recharge Your Mind</h2>
+        </div> */}
+        <h2 className="text-3xl md:text-5xl font-orbitron font-bold mb-4">MindGard</h2>
         <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base px-4">
-          Short, AI-enhanced experiences designed to refresh your cognitive focus during break cycles.
+          Shor experiences designed to refresh your cognitive focus during break cycles.
         </p>
       </div>
 
