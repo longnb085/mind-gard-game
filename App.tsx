@@ -17,6 +17,33 @@ import NumberBattle from './games/NumberBattle';
 
 const App: React.FC = () => {
   const [currentMode, setCurrentMode] = useState<GameMode>(GameMode.LOBBY);
+  const [sessionTime, setSessionTime] = useState(300); // 5 minutes global break limit
+  const [isSessionOver, setIsSessionOver] = useState(false);
+
+  // Global Timer Effect
+  React.useEffect(() => {
+    if (sessionTime <= 0) {
+      setIsSessionOver(true);
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setSessionTime(prev => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [sessionTime]);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const extendBreak = () => {
+    setSessionTime(60); // Add 1 minute
+    setIsSessionOver(false);
+  };
 
   const renderContent = () => {
     switch (currentMode) {
@@ -28,14 +55,12 @@ const App: React.FC = () => {
         return <SchulteTable onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.STROOP_CHALLENGE:
         return <StroopChallenge onExit={() => setCurrentMode(GameMode.LOBBY)} />;
-
       case GameMode.MEMORY_MATRIX:
         return <MemoryMatrix onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.TYPE_SPRINT:
         return <TypeSprint onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.NUMBER_BATTLE:
         return <NumberBattle onExit={() => setCurrentMode(GameMode.LOBBY)} />;
-
       case GameMode.MIND_SPARKS:
         return <MindSparks onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.STUDY_QUIZ:
@@ -46,7 +71,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen h-screen flex flex-col bg-[#0a0f1d] overflow-hidden">
+    <div className="min-h-screen h-screen flex flex-col bg-[#0a0f1d] overflow-hidden relative">
       {/* Header */}
       <header className="p-4 md:p-6 flex justify-between items-center glass sticky top-0 z-50">
         <div
@@ -62,14 +87,13 @@ const App: React.FC = () => {
         </div>
 
         <div className="flex gap-4 md:gap-6 items-center">
-          <div className="hidden md:flex flex-col items-end">
-            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Pomodoro Status</span>
-            <span className="text-sm text-pink-500 font-medium">Break in Progress</span>
+          <div className="flex flex-col items-end">
+            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Break Time Remaining</span>
+            <div className={`text-xl font-mono font-bold flex items-center gap-2 ${sessionTime < 60 ? 'text-rose-500 animate-pulse' : 'text-emerald-400'}`}>
+              <i className="fas fa-stopwatch text-sm"></i>
+              {formatTime(sessionTime)}
+            </div>
           </div>
-          {/* <div className="px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-xs font-medium text-slate-400 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            AI Online
-          </div> */}
         </div>
       </header>
 
@@ -84,6 +108,32 @@ const App: React.FC = () => {
       <footer className="p-4 text-center text-slate-600 text-[10px] uppercase tracking-[0.2em] shrink-0">
         Designed for Focus • Powered by Gemini 3.0
       </footer>
+
+      {/* Global Session Timeout Modal */}
+      {isSessionOver && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md animate-fade-in">
+          <div className="text-center max-w-md w-full mx-4 p-8 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl">
+            <div className="text-6xl mb-6">☕</div>
+            <h2 className="text-3xl font-orbitron font-bold text-white mb-2">Break Complete</h2>
+            <p className="text-slate-400 mb-8">Time to get back to work! Your brain is refreshed.</p>
+
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => window.close()}
+                className="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-emerald-500/20"
+              >
+                Return to Work
+              </button>
+              <button
+                onClick={extendBreak}
+                className="w-full py-3 bg-transparent hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl font-medium transition-colors text-sm"
+              >
+                Need 1 more minute?
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
