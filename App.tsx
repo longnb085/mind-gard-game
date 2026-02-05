@@ -87,6 +87,16 @@ const App: React.FC = () => {
         </div>
 
         <div className="flex gap-4 md:gap-6 items-center">
+          <a
+            href="https://github.com/NguyenKiem204/MindGardExtension"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/50 text-indigo-300 text-xs font-bold uppercase tracking-wide transition-all hover:scale-105"
+          >
+            <i className="fas fa-puzzle-piece"></i>
+            <span>MindGard Extension</span>
+          </a>
+
           <div className="flex flex-col items-end">
             <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Break Time Remaining</span>
             <div className={`text-xl font-mono font-bold flex items-center gap-2 ${sessionTime < 60 ? 'text-rose-500 animate-pulse' : 'text-emerald-400'}`}>
