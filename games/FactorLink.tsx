@@ -11,7 +11,7 @@ interface Tile {
     c: number;
 }
 
-const PRIMES = [2, 3, 5, 7, 11, 13, 17];
+const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23];
 
 const FactorLink: React.FC<NumberBattleProps> = ({ onExit }) => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -49,15 +49,15 @@ const FactorLink: React.FC<NumberBattleProps> = ({ onExit }) => {
         if (size === 4) {
             primes = [2, 3, 5, 7];
             maxVal = 200;
-            density = 3.2;
+            density = 2.2;
         } else if (size === 6) {
             primes = [2, 3, 5, 7, 11, 13];
-            maxVal = 500;
-            density = 3.8;
+            maxVal = 600;
+            density = 2.8;
         } else {
-            primes = [2, 3, 5, 7, 11, 13, 17];
-            maxVal = 1000;
-            density = 4.2;
+            primes = [2, 3, 5, 7, 11, 13, 17, 19, 23];
+            maxVal = 3000;
+            density = 3.2;
         }
 
         // 3. Distribute Pairs of Primes
