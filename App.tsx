@@ -60,7 +60,7 @@ const App: React.FC = () => {
       case GameMode.TYPE_SPRINT:
         return <TypeSprint onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.NUMBER_BATTLE:
-        return <NumberBattle onExit={() => setCurrentMode(GameMode.LOBBY)} />;
+        return <FactorLink onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.MIND_SPARKS:
         return <MindSparks onExit={() => setCurrentMode(GameMode.LOBBY)} />;
       case GameMode.STUDY_QUIZ:

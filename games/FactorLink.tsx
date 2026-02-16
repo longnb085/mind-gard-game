@@ -47,17 +47,17 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
         let density = 2.5; // Average factors per tile
 
         if (size === 4) {
-            primes = [2, 3, 5];
-            maxVal = 50;
-            density = 2.2;
-        } else if (size === 6) {
             primes = [2, 3, 5, 7];
             maxVal = 100;
-            density = 2.8;
-        } else {
+            density = 2.5;
+        } else if (size === 6) {
+            primes = [2, 3, 5, 7, 11];
+            maxVal = 250;
+            density = 3.0;
+        } else { // Default for size 8
             primes = [2, 3, 5, 7, 11, 13];
-            maxVal = 150;
-            density = 3.2;
+            maxVal = 500;
+            density = 3.5;
         }
 
         // 3. Distribute Pairs of Primes
@@ -72,9 +72,14 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
             attempts++;
             const p = primes[Math.floor(Math.random() * primes.length)];
 
-            // Pick two random indices (can be the same, allowing square numbers like 49, 25)
+            // Pick two DISTINCT random indices
             const idx1 = Math.floor(Math.random() * totalTiles);
-            const idx2 = Math.floor(Math.random() * totalTiles);
+            let idx2 = Math.floor(Math.random() * totalTiles);
+
+            // Retry idx2 if it matches idx1
+            if (idx1 === idx2) {
+                idx2 = (idx1 + 1) % totalTiles;
+            }
 
             const newVal1 = numbers[idx1] * p;
             const newVal2 = numbers[idx2] * p;
@@ -90,14 +95,29 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
         // 4. Ensure no tile remains '1'
         // If a tile is 1, we MUST add a pair involving it.
         for (let i = 0; i < totalTiles; i++) {
-            while (numbers[i] === 1) {
+            let safety = 0;
+            while (numbers[i] === 1 && safety < 100) {
+                safety++;
                 const p = primes[Math.floor(Math.random() * primes.length)];
-                const otherIdx = Math.floor(Math.random() * totalTiles);
+
+                // Pick any OTHER tile
+                let otherIdx = Math.floor(Math.random() * totalTiles);
+                if (otherIdx === i) {
+                    otherIdx = (i + 1) % totalTiles;
+                }
 
                 if (numbers[otherIdx] * p <= maxVal * 1.5) {
                     numbers[i] *= p;
                     numbers[otherIdx] *= p;
                 }
+            }
+
+            // Fallback: if stuck at 1 (rare), force multiply with smallest prime and a random neighbor ignoring limit
+            if (numbers[i] === 1) {
+                const p = primes[0]; // smallest
+                let otherIdx = (i + 1) % totalTiles;
+                numbers[i] *= p;
+                numbers[otherIdx] *= p;
             }
         }
 

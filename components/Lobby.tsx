@@ -49,7 +49,7 @@ const Lobby: React.FC<LobbyProps> = ({ onSelectGame }) => {
     },
     {
       id: GameMode.NUMBER_BATTLE,
-      title: "Number Battle",
+      title: "Factor Link",
       description: "Connect matching numbers or divide them by their GCD. Clear the board.",
       icon: "fa-divide",
       color: "from-blue-600 to-indigo-500",
