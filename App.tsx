@@ -12,7 +12,7 @@ import StroopChallenge from './games/StroopChallenge';
 
 import MemoryMatrix from './games/MemoryMatrix';
 import TypeSprint from './games/TypeSprint';
-import NumberBattle from './games/NumberBattle';
+import FactorLink from './games/FactorLink';
 
 
 const App: React.FC = () => {

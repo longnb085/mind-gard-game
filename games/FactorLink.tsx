@@ -13,7 +13,7 @@ interface Tile {
 
 const PRIMES = [2, 3, 5, 7, 11, 13, 17];
 
-const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
+const FactorLink: React.FC<NumberBattleProps> = ({ onExit }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [gridSize, setGridSize] = useState(6);
     const [grid, setGrid] = useState<(Tile | null)[][]>([]);
@@ -48,16 +48,16 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
 
         if (size === 4) {
             primes = [2, 3, 5, 7];
-            maxVal = 100;
-            density = 2.5;
+            maxVal = 200;
+            density = 3.2;
         } else if (size === 6) {
-            primes = [2, 3, 5, 7, 11];
-            maxVal = 250;
-            density = 3.0;
-        } else { // Default for size 8
             primes = [2, 3, 5, 7, 11, 13];
             maxVal = 500;
-            density = 3.5;
+            density = 3.8;
+        } else {
+            primes = [2, 3, 5, 7, 11, 13, 17];
+            maxVal = 1000;
+            density = 4.2;
         }
 
         // 3. Distribute Pairs of Primes
@@ -263,7 +263,7 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
                 </button>
 
                 <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">
-                    Number Battle
+                    Factor Link
                 </h1>
 
                 <div className="grid gap-4 w-full max-w-sm">
@@ -306,7 +306,7 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
                 </div>
             </div>
 
-            <h2 className="text-3xl font-orbitron font-bold text-white mb-2">Number Battle</h2>
+            <h2 className="text-3xl font-orbitron font-bold text-white mb-2">Factor Link</h2>
             <p className="text-slate-400 mb-6 min-h-[1.5em]">{message}</p>
 
             <div className="bg-slate-900 p-8 rounded-xl shadow-2xl border border-slate-700">
@@ -403,4 +403,4 @@ const NumberBattle: React.FC<NumberBattleProps> = ({ onExit }) => {
     );
 };
 
-export default NumberBattle;
+export default FactorLink;
